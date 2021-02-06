@@ -1,0 +1,49 @@
+<div class="container">
+
+<form [formGroup]="timesForm" (ngSubmit)="onSubmit()">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">KW</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Wochentag</th>
+            <th scope="col">Start</th>
+            <th scope="col">Stop</th>
+            <th scope="col">Pause</th>
+            <th scope="col">Ist</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">{{ 1 }}</th>
+            <td>1.2.2021</td>
+            <td>Montag</td>
+            <td class="form-group">
+                <input
+                        type="text"
+                        formControlName="start"
+                >
+                <span
+
+                        class="help-block"
+                >
+                    Please Enter valid start time
+                </span>
+            </td>
+            <td class="form-group">
+                <input type="text" formControlName="stop">
+            </td>
+            <td class="form-group">
+                <input type="text" formControlName="pause">
+            </td>
+            <td>800</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><button type="submit">Submit</button></p>
+</form>
+
+</div>
