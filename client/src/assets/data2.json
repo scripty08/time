@@ -1,0 +1,16 @@
+[
+  {
+    "id": "id-1",
+    "kw": "1",
+    "date-1": "1.5.2021",
+    "day": "Montag",
+    "start-1": 545,
+    "stop-1": 44,
+    "pause-1": 350,
+    "ist-1": 53,
+    "checkbox1-1": false,
+    "checkbox2-1": true,
+    "checkbox3-1": false,
+    "checkbox4-1": true
+  }
+]
