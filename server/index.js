@@ -1,8 +1,8 @@
 import { Server, IndexController } from '@scripty/server';
 import dotenv from 'dotenv'
 import { mongo } from '@scripty/mongo';
-//import { RoutesController } from '@scripty/routes';
 import { AuthController } from '@scripty/auth';
+import { TimesController } from './times/TimesController';
 
 const init = async () => {
   dotenv.config();
@@ -18,15 +18,15 @@ const init = async () => {
     options: {
       "encrypt": true
     }
-  }
+  };
 
   const mongoose = await mongo(mongoConfig);
 
   await server.setDatabase(mongoose);
   await server.addController(new AuthController());
   await server.addController(new IndexController({ title: '@scripty/time' }));
-  //await server.addController(new RoutesController());
-  server.start(3008);
+  await server.addController(new TimesController());
+  server.start(3001);
 };
 
 init().catch((err) => {

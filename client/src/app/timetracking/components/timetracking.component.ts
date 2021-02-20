@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import CalendarDates from 'calendar-dates';
 import * as moment from 'moment';
@@ -6,117 +6,118 @@ import { IData } from '../interfaces/timetracking.interface';
 import { TimetrackingService } from '../services/timetracking.service';
 
 @Component({
-  selector   : 'timetracking',
-  templateUrl: '../templates/timetracking.component.html',
-  styleUrls  : ['../styles/timetracking.component.scss']
+    selector: 'timetracking',
+    templateUrl: '../templates/timetracking.component.html',
+    styleUrls: ['../styles/timetracking.component.scss']
 })
-export class TimetrackingComponent implements OnInit, AfterContentChecked {
+export class TimetrackingComponent implements OnInit {
 
-  timesForm: FormGroup | undefined;
-  toolbarForm: FormGroup | undefined;
-  years = [2021, 2022, 2023];
-  months = [
-    { text: 'Januar', value: 1 },
-    { text: 'Februar', value: 2 },
-    { text: 'März', value: 3 },
-    { text: 'April', value: 4 },
-    { text: 'Mai', value: 5 },
-    { text: 'Juni', value: 6 },
-    { text: 'Juli', value: 7 },
-    { text: 'August', value: 8 },
-    { text: 'September', value: 9 },
-    { text: 'Oktober', value: 10 },
-    { text: 'November', value: 11 },
-    { text: 'Dezember', value: 12 }
-  ];
-  dates = [];
-  controlls = {};
-  currentYear = parseInt(moment().format('Y'));
-  currentMonth = parseInt(moment().format('M'));
-  data: Array<IData>;
+    timesForm:FormGroup | undefined;
+    toolbarForm:FormGroup | undefined;
+    years = [2021, 2022, 2023];
+    months = [
+        {text: 'Januar', value: 1},
+        {text: 'Februar', value: 2},
+        {text: 'März', value: 3},
+        {text: 'April', value: 4},
+        {text: 'Mai', value: 5},
+        {text: 'Juni', value: 6},
+        {text: 'Juli', value: 7},
+        {text: 'August', value: 8},
+        {text: 'September', value: 9},
+        {text: 'Oktober', value: 10},
+        {text: 'November', value: 11},
+        {text: 'Dezember', value: 12}
+    ];
+    dates = [];
+    currentYear = parseInt(moment().format('Y'));
+    currentMonth = parseInt(moment().format('M'));
+    data:Array<IData>;
 
-  constructor(private formBuilder: FormBuilder, private $timetrackingService: TimetrackingService) {
-    this.timesForm = formBuilder.group({});
-    this.toolbarForm = formBuilder.group({year: '', month: ''});
-    this.fetchData('/assets/data.json');
-    moment.locale('de');
-  }
-
-
-
-  async ngOnInit() {
-    await this.initTimesForm();
-    this.initToolbarForm();
-  }
-
-  ngAfterContentChecked() {
-    this.timesForm.reset();
-    if (this.data) {
-      this.data.forEach((rec, idx) => {
-        this.timesForm.patchValue(rec);
-      });
+    constructor(private formBuilder:FormBuilder, private $timetrackingService:TimetrackingService) {
+        this.timesForm = formBuilder.group({});
+        this.toolbarForm = formBuilder.group({year: '', month: ''});
+        this.fetchData(this.currentYear, this.currentMonth);
+        moment.locale('de');
     }
-  }
 
-  async onSelectMonthChange(e) {
-    this.currentMonth = e.target.value;
-    this.fetchData('/assets/data2.json');
-    await this.initTimesForm();
-  }
+    async ngOnInit() {
+        await this.initTimesForm();
+        this.initToolbarForm();
+    }
 
-  async onSelectYearChange(e) {
-    this.currentYear = e.target.value;
-    await this.initTimesForm();
-  }
+    async onSelectMonthChange(e) {
+        this.currentMonth = e.target.value;
+        this.fetchData(this.currentYear, this.currentMonth);
+        await this.initTimesForm();
+    }
 
-  onSaveBtnClick(): void {
-    console.log(this.timesForm, ' <----------- timesForm ------------');
-  }
+    async onSelectYearChange(e) {
+        this.currentYear = e.target.value;
+        await this.initTimesForm();
+    }
 
-  onInput(event): void {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.data.map((rec) => {
-      rec[name] = value;
-    });
-  }
+    onSaveBtnClick():void {
+        console.log(this.timesForm, ' <----------- timesForm ------------');
+    }
 
-  private initToolbarForm() {
-    this.toolbarForm = new FormGroup({
-      year: new FormControl(moment().format('Y'), Validators.required),
-      month: new FormControl(moment().format('M'), Validators.required)
-    });
-  }
+    onInput(event):void {
+        const name = event.target.name;
+        const value = event.target.value;
 
-  private async initTimesForm() {
-    const calendarDates = new CalendarDates();
-    const year      = new Date(this.currentYear, this.currentMonth -1);
-    const dates         = await calendarDates.getDates(year);
+        console.log(name, ' <------------ name --------------');
+        console.log(value, ' <------------ value --------------');
 
-    this.dates     = dates.map((rec, idx) => {
-      this.addControlls(idx);
-      rec.day = moment(rec.iso).format('dddd');
-      rec.kw  = moment(rec.iso).format('W')
-      rec.iso = moment(rec.iso).format('DD.MM.YYYY');
-      return rec;
-    }).filter(val => val.type === 'current');
-    this.timesForm = new FormGroup(this.controlls);
-  }
+        /*this.data.map((rec) => {
+            rec[name] = value;
+        });*/
+    }
 
-  private addControlls(idx: number): void {
-    this.controlls['date-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['start-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['stop-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['pause-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['checkbox1-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['checkbox2-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['checkbox3-'+idx] = new FormControl(null, Validators.required);
-    this.controlls['checkbox4-'+idx] = new FormControl(null, Validators.required);
-  }
+    private initToolbarForm() {
+        this.toolbarForm = new FormGroup({
+            year: new FormControl(moment().format('Y'), Validators.required),
+            month: new FormControl(moment().format('M'), Validators.required)
+        });
+    }
 
-  private fetchData(url) {
-    this.$timetrackingService.getData(url).subscribe((rec) => {
-      this.data = rec;
-    });
-  }
+    onResetBtnClick(): void {
+        this.timesForm.reset();
+    }
+
+    private async initTimesForm() {
+        const calendarDates = new CalendarDates();
+        const year = new Date(this.currentYear, this.currentMonth - 1);
+        const dates = await calendarDates.getDates(year);
+        const controls = {};
+
+        this.dates = dates.map((rec:any, idx) => {
+
+            rec.day = moment(rec.iso).format('dddd');
+            rec.kw = moment(rec.iso).format('W');
+            rec.iso = moment(rec.iso).format('DD.MM.YYYY');
+
+            controls['row-group-' + idx] = new FormGroup({
+                ['row-control']: new FormGroup({
+                    'start': new FormControl(null, Validators.required),
+                    'stop': new FormControl(null, Validators.required),
+                    'pause': new FormControl(null, Validators.required),
+                    'ist': new FormControl(null, Validators.required),
+                    'krank': new FormControl(null, Validators.required),
+                    'urlaub': new FormControl(null, Validators.required),
+                    'ueberstunden': new FormControl(null, Validators.required),
+                    'konferenz': new FormControl(null, Validators.required),
+                })
+            });
+
+            return rec;
+        });
+        this.timesForm = new FormGroup(controls);
+    }
+
+
+    private fetchData(year, month) {
+        this.$timetrackingService.read(year, month).subscribe(rec => {
+            this.timesForm.patchValue(rec);
+        });
+    }
 }

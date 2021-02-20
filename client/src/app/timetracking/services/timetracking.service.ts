@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {IData} from "../interfaces/timetracking.interface";
 import { Observable } from "rxjs/index";
+import { of } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,22 @@ export class TimetrackingService {
 
   constructor(private http: HttpClient) { }
 
-  getData(url = '/assets/data.json'): Observable<IData[]> {
-    return this.http.get<IData[]>(url);
+  rootURL = '/api';
+
+  read(year, month): Observable<IData[]> {
+
+    const params = new HttpParams()
+        .set('year', year)
+        .set('month', month);
+
+    return this.http.get<IData[]>(this.rootURL + '/times/read', {params}).pipe(
+        map((res: any) => {
+          if (!res.entries) {
+            throw new Error('Value expected!');
+          }
+          return res.entries;
+        }),
+        catchError(err => of([]))
+    );
   }
 }

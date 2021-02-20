@@ -3,7 +3,7 @@
 
     <div class="button-group">
       <button type="button" class="btn btn-success btn-sm" (click)="onSaveBtnClick()"><i class="fas fa-save"></i> Speichern</button>
-      <button type="button" class="btn btn-primary btn-sm mx-1" data-mdb-ripple-color="dark"><i class="fas fa-undo-alt"></i> Reset</button>
+      <button type="button" class="btn btn-primary btn-sm mx-1" (click)="onResetBtnClick()" data-mdb-ripple-color="dark"><i class="fas fa-undo-alt"></i> Reset</button>
     </div>
 
     <form [formGroup]="toolbarForm">
@@ -38,40 +38,40 @@
                   <th scope="col">Einstellungen</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr *ngFor="let date of dates; let i=index;">
-                  <td scope="row">{{ date.kw }}</td>
-                  <td>{{ date.day }}</td>
-                  <td>{{ date.iso }}</td>
-                  <td class="form-group"><input [name]="'start-'+i" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'start-'+i"/></td>
-                  <td class="form-group"><input [name]="'stop-'+i" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'stop-'+i"/></td>
-                  <td class="form-group"><input [name]="'pause-'+i" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'pause-'+i"/></td>
-                  <td>800</td>
-                  <td>
-                    <div style="height: 5px">
-                      <div class="form-check form-check-inline form-group">
-                        <input class="form-check-input" type="checkbox" [id]="'checkbox1-'+i" value="option1"
-                               [formControlName]="'checkbox1-'+i"/>
-                        <label class="form-check-label" [for]="'checkbox1-'+i">Krank</label>
+                <tbody *ngFor="let date of dates; let i=index;" [formGroupName]="'row-group-'+i">
+                  <tr [formGroupName]="'row-control'">
+                    <td class="form-group" scope="row">{{ date.kw }}</td>
+                    <td class="form-group">{{ date.day }}</td>
+                    <td class="form-group">{{ date.iso }}</td>
+                    <td class="form-group"><input [name]="'start'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'start'"/></td>
+                    <td class="form-group"><input [name]="'stop'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'stop'"/></td>
+                    <td class="form-group"><input [name]="'pause'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'pause'"/></td>
+                    <td class="form-group">800</td>
+                    <td class="form-group">
+                      <div style="height: 5px">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" [id]="'krank'+i" value="option1"
+                                 [formControlName]="'krank'"/>
+                          <label class="form-check-label" [for]="'krank'+i">Krank</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" [id]="'urlaub'+i" value="option2"
+                                 [formControlName]="'urlaub'"/>
+                          <label class="form-check-label" [for]="'urlaub'+i">Urlaub</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" [id]="'ueberstunden'+i" value="option3"
+                                 [formControlName]="'ueberstunden'"/>
+                          <label class="form-check-label" [for]="'ueberstunden'+i">Ü-Frei</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" [id]="'konferenz'+i" value="option4"
+                                 [formControlName]="'konferenz'"/>
+                          <label class="form-check-label" [for]="'konferenz'+i">Konferenz</label>
+                        </div>
                       </div>
-                      <div class="form-check form-check-inline form-group">
-                        <input class="form-check-input" type="checkbox" [id]="'checkbox2-'+i" value="option2"
-                               [formControlName]="'checkbox2-'+i"/>
-                        <label class="form-check-label" [for]="'checkbox2-'+i">Urlaub</label>
-                      </div>
-                      <div class="form-check form-check-inline form-group">
-                        <input class="form-check-input" type="checkbox" [id]="'checkbox3-'+i" value="option3"
-                               [formControlName]="'checkbox3-'+i"/>
-                        <label class="form-check-label" [for]="'checkbox3-'+i">Ü-Frei</label>
-                      </div>
-                      <div class="form-check form-check-inline form-group">
-                        <input class="form-check-input" type="checkbox" [id]="'checkbox4-'+i" value="option4"
-                               [formControlName]="'checkbox4-'+i"/>
-                        <label class="form-check-label" [for]="'checkbox4-'+i">Konferenz</label>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
