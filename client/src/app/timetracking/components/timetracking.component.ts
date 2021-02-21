@@ -4,6 +4,7 @@ import CalendarDates from 'calendar-dates';
 import * as moment from 'moment';
 import { IData } from '../interfaces/timetracking.interface';
 import { TimetrackingService } from '../services/timetracking.service';
+import {logger} from "codelyzer/util/logger";
 
 @Component({
     selector: 'timetracking',
@@ -58,19 +59,18 @@ export class TimetrackingComponent implements OnInit {
     }
 
     onSaveBtnClick():void {
-        console.log(this.timesForm, ' <----------- timesForm ------------');
+        const data = Object.keys(this.timesForm.value).map((key:any) => {
+            if (this.timesForm.controls[key].dirty) {
+                return this.timesForm.controls[key].value['row-control'];
+            }
+        }).filter(val => typeof val !== 'undefined');
+
+        this.updateData(data);
     }
 
     onInput(event):void {
         const name = event.target.name;
         const value = event.target.value;
-
-        console.log(name, ' <------------ name --------------');
-        console.log(value, ' <------------ value --------------');
-
-        /*this.data.map((rec) => {
-            rec[name] = value;
-        });*/
     }
 
     private initToolbarForm() {
@@ -84,6 +84,14 @@ export class TimetrackingComponent implements OnInit {
         this.timesForm.reset();
     }
 
+    onDeleteBtnClick(date): void {
+        const data = this.timesForm.getRawValue();
+        const _id = data['row-group-'+date]['row-control']._id;
+        if(_id) {
+            this.destroyData(_id)
+        }
+    }
+
     private async initTimesForm() {
         const calendarDates = new CalendarDates();
         const year = new Date(this.currentYear, this.currentMonth - 1);
@@ -91,13 +99,16 @@ export class TimetrackingComponent implements OnInit {
         const controls = {};
 
         this.dates = dates.map((rec:any, idx) => {
-
-            rec.day = moment(rec.iso).format('dddd');
+            rec.day = moment(rec.iso).format('ddd');
             rec.kw = moment(rec.iso).format('W');
-            rec.iso = moment(rec.iso).format('DD.MM.YYYY');
-
-            controls['row-group-' + idx] = new FormGroup({
-                ['row-control']: new FormGroup({
+            rec.datum = moment(rec.iso).format('DD.MM.YYYY');
+            rec.date = moment(rec.iso).format('DD.MM.YYYY');
+            const controlName = 'row-group-' + rec.datum;
+            rec.controlName = controlName;
+            controls[controlName] = new FormGroup({
+                'row-control': new FormGroup({
+                    '_id': new FormControl(null, Validators.required),
+                    'datum': new FormControl(rec.iso, Validators.required),
                     'start': new FormControl(null, Validators.required),
                     'stop': new FormControl(null, Validators.required),
                     'pause': new FormControl(null, Validators.required),
@@ -110,14 +121,29 @@ export class TimetrackingComponent implements OnInit {
             });
 
             return rec;
-        });
+        }).filter((val:any) => val.type === 'current');
+
         this.timesForm = new FormGroup(controls);
+
+        console.log(this.timesForm, ' <------------ this.timesForm --------------');
     }
 
 
     private fetchData(year, month) {
         this.$timetrackingService.read(year, month).subscribe(rec => {
             this.timesForm.patchValue(rec);
+        });
+    }
+
+    private updateData(data) {
+        this.$timetrackingService.update(data).subscribe(rec => {
+            this.timesForm.patchValue(rec);
+        });
+    }
+
+    private destroyData(_id) {
+        this.$timetrackingService.destroy(_id).subscribe(rec => {
+            //this.timesForm.patchValue(rec);
         });
     }
 }

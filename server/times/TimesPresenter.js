@@ -1,4 +1,5 @@
 import { READ } from './Constants';
+import moment from 'moment';
 
 export class TimesPresenter {
     constructor(response) {
@@ -11,8 +12,9 @@ export class TimesPresenter {
         switch (code) {
             case READ:
                 const result = response.reduce(function(result, item, index) {
-                    result['row-group-'+index] = {
-                        'row-control': item
+                    const date = moment(item.datum).format('DD.MM.YYYY');
+                    result['row-group-'+date] = {
+                        ['row-control']: item
                     };
                     return result;
                 }, {});

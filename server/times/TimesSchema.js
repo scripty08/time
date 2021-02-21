@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 export const TimesSchema = {
-    kw: String,
     datum: Date,
-    pause: Number,
-    start: Number,
-    stop: Number,
+    pause: mongoose.Schema.Types.Decimal128,
+    start: Date,
+    stop: Date,
     ist: mongoose.Schema.Types.Decimal128,
     krank: Boolean,
     konferenz: Boolean,

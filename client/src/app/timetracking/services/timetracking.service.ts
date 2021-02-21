@@ -31,4 +31,30 @@ export class TimetrackingService {
         catchError(err => of([]))
     );
   }
+
+  update(data): Observable<IData[]> {
+    return this.http.post<IData[]>(this.rootURL + '/times/update', data).pipe(
+        map((res: any) => {
+          if (!res.entries) {
+            throw new Error('Value expected!');
+          }
+          return res.entries;
+        }),
+        catchError(err => of([]))
+    );
+  }
+
+  destroy(_id): Observable<IData[]> {
+      const params = new HttpParams()
+          .set('_id', _id)
+    return this.http.get<IData[]>(this.rootURL + '/times/destroy', {params}).pipe(
+        map((res: any) => {
+          if (!res.entries) {
+            throw new Error('Value expected!');
+          }
+          return res.entries;
+        }),
+        catchError(err => of([]))
+    );
+  }
 }

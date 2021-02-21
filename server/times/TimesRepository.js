@@ -46,4 +46,33 @@ export class TimesRepository {
             Logger.error(e)
         }
     };
+
+    async update(data = {}, presenter) {
+        let { _id, ...restProps } = data;
+
+        if (!_id) {
+            _id = new mongoose.mongo.ObjectID()
+        }
+
+        try {
+            return await this.model.findOneAndUpdate(
+                { _id },
+                { ...restProps },
+                { new: true, upsert: true }
+            );
+        } catch (e) {
+            Logger.error(e)
+        }
+    };
+
+    async destroy(data, presenter) {
+        let { _id } = data;
+        console.log(_id, ' <------------ _id  --------------');
+
+        try {
+            return await this.model.findOneAndRemove({ _id: _id });
+        } catch (e) {
+            Logger.error(e)
+        }
+    };
 }

@@ -29,7 +29,7 @@
                 <thead>
                 <tr>
                   <th scope="col">KW</th>
-                  <th scope="col">Wochentag</th>
+                  <th scope="col">Tag</th>
                   <th scope="col">Datum</th>
                   <th scope="col">Start</th>
                   <th scope="col">Stop</th>
@@ -38,15 +38,16 @@
                   <th scope="col">Einstellungen</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let date of dates; let i=index;" [formGroupName]="'row-group-'+i">
+                <tbody *ngFor="let date of dates; let i=index;" [formGroupName]="date.controlName">
                   <tr [formGroupName]="'row-control'">
+                    <input [name]="'_id'" (input)="onInput($event)" type="hidden" [formControlName]="'_id'"/>
                     <td class="form-group" scope="row">{{ date.kw }}</td>
                     <td class="form-group">{{ date.day }}</td>
-                    <td class="form-group">{{ date.iso }}</td>
+                    <td class="form-group">{{ date.date }}<input [name]="'datum'" (input)="onInput($event)" type="hidden" [formControlName]="'datum'"/></td>
                     <td class="form-group"><input [name]="'start'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'start'"/></td>
                     <td class="form-group"><input [name]="'stop'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'stop'"/></td>
                     <td class="form-group"><input [name]="'pause'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'pause'"/></td>
-                    <td class="form-group">800</td>
+                    <td class="form-group">800<input [name]="'ist'" (input)="onInput($event)" type="hidden" [formControlName]="'ist'"/></td>
                     <td class="form-group">
                       <div style="height: 5px">
                         <div class="form-check form-check-inline">
@@ -68,6 +69,9 @@
                           <input class="form-check-input" type="checkbox" [id]="'konferenz'+i" value="option4"
                                  [formControlName]="'konferenz'"/>
                           <label class="form-check-label" [for]="'konferenz'+i">Konferenz</label>
+                        </div>
+                        <div *ngIf="timesForm.get('row-group-13.02.2021')" class="form-check-inline" style="position:relative; top: -6px">
+                            <i (click)="onDeleteBtnClick(date.datum)" class="fa fa-trash" style="cursor:pointer"></i>
                         </div>
                       </div>
                     </td>
