@@ -9,7 +9,7 @@ export default class Repository extends BaseRepository {
 
     async findOne(params) {
         try {
-            const response = await this.model.findOne({...params});
+            const response = await this.model.findOne(params);
             return { response };
 
         } catch (e) {

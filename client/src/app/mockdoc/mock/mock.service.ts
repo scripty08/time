@@ -14,7 +14,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   findOne(id): Observable<MockInterface> {
-    const params = new HttpParams().set('id', id);
+    const params = new HttpParams().set('_id', id);
 
     return this.http.get<MockInterface>(this.rootURL + '/findOne', {params}).pipe(
       map((res: any) => {

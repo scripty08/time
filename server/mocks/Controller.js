@@ -8,6 +8,9 @@ import ReadInteractor from './usecase/read/Interactor';
 import FindOnePresenter from './usecase/findOne/Presenter';
 import FindOneRepository from './usecase/findOne/Repository';
 import FindOneInteractor from './usecase/findOne/Interactor';
+import FindMockPresenter from './usecase/findMock/Presenter';
+import FindMockRepository from './usecase/findMock/Repository';
+import FindMockInteractor from './usecase/findMock/Interactor';
 import UpdatePresenter from './usecase/update/Presenter';
 import UpdateRepository from './usecase/update/Repository';
 import UpdateInteractor from './usecase/update/Interactor';
@@ -23,6 +26,8 @@ export class MocksController {
         router.get('/api/findOne', this.findOneAction);
         router.post('/api/update', this.updateAction);
         router.post('/api/destroy', this.destroyAction);
+        router.get('/api/mock/*', this.findMock);
+        router.post('/api/mock/*', this.findMock);
         server.use(router);
     }
 
@@ -45,6 +50,13 @@ export class MocksController {
         const presenter = new FindOnePresenter(res);
         const repository = new FindOneRepository(Schema);
         const interactor = new FindOneInteractor(req, repository, presenter);
+        return interactor.run()
+    }
+
+    findMock(req, res) {
+        const presenter = new FindMockPresenter(res);
+        const repository = new FindMockRepository(Schema);
+        const interactor = new FindMockInteractor(req, repository, presenter);
         return interactor.run()
     }
 
