@@ -1,4 +1,5 @@
 export interface MockInterface {
+  _id: string;
   path: string;
   contentType: string;
   category: string;

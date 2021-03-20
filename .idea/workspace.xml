@@ -1,67 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f084626d-625b-4f7b-8914-edb97c8a80d2" name="Default Changelist" comment="add logic">
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/code.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/code.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/BaseRepository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/Constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/categories/CategoriesController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/categories/CategoriesPresenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/categories/CategoriesRepository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/categories/CategoriesSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/helper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/Schema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/destroy/Interactor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/destroy/Presenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/destroy/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/findOne/Interactor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/findOne/Presenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/findOne/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/read/Interactor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/read/Presenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/read/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/search/Interactor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/search/Presenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/search/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/update/Interactor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/update/Presenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/mocks/usecase/update/Repository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/time.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/time.iml" afterDir="false" />
+    <list default="true" id="f084626d-625b-4f7b-8914-edb97c8a80d2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/app/global.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/pagination/pagination.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/pagination/pagination.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/pagination/pagination.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/pagination/pagination.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/pagination/pagination.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/window.providers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/components/dashboard.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/interfaces/dashboard.interface.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/models/dashboard.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/services/dashbaord.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/styles/dashboard.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/templates/dashboard.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/tests/dashbaord.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/dashboard/tests/dashboard.service.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/header/header.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/timetracking/components/timetracking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/timetracking/components/timetracking.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/timetracking/services/timetracking.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/timetracking/services/timetracking.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/timetracking/templates/timetracking.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/timetracking/templates/timetracking.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/times/TimesController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/times/TimesController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/times/TimesSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/times/TimesSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mock/mock.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/mockdoc/mocks/mocks.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mocks/usecase/read/Presenter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/mocks/usecase/read/Presenter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mocks/usecase/update/Repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/mocks/usecase/update/Repository.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,7 +335,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/mocks/usecase" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/app" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -384,18 +344,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\danij\projects\tools\time\client\src\app" />
+      <recent name="C:\Users\danij\projects\tools\time\client\src\app\pagination" />
       <recent name="C:\Users\danij\projects\tools\time\server\mocks\usecase" />
       <recent name="C:\Users\danij\projects\tools\time\client\src\app\mockdoc" />
       <recent name="C:\Users\danij\projects\tools\time\client\src\app\dashboard\interfaces" />
-      <recent name="C:\Users\danij\projects\tools\time\server" />
-      <recent name="C:\Users\danijel.garic\projects\tools\time" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danij\projects\tools\time\client\src\app" />
       <recent name="C:\Users\danij\projects\tools\time\client\src\app\mockdoc\new" />
       <recent name="C:\Users\danijel.garic\projects\tools\time" />
       <recent name="C:\Users\danijel.garic\projects\tools\time\time\src\app\timetracking\templates" />
       <recent name="C:\Users\danijel.garic\projects\tools\time\time\src\app\timetracking\models" />
-      <recent name="C:\Users\danijel.garic\projects\tools\time\time\src\app\timetracking\interfaces" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start (1)">
@@ -483,7 +443,7 @@
       <workItem from="1615489373824" duration="601000" />
       <workItem from="1615919906172" duration="31000" />
       <workItem from="1616189446659" duration="6138000" />
-      <workItem from="1616220677780" duration="17885000" />
+      <workItem from="1616220677780" duration="35926000" />
     </task>
     <task id="LOCAL-00001" summary="add logic">
       <created>1613830075999</created>
@@ -499,7 +459,21 @@
       <option name="project" value="LOCAL" />
       <updated>1613924843259</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add mockdoc">
+      <created>1616245485285</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616245485285</updated>
+    </task>
+    <task id="LOCAL-00004" summary="set headers">
+      <created>1616250558676</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616250558676</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -543,7 +517,9 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="add logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="add logic" />
+    <MESSAGE value="add mockdoc" />
+    <MESSAGE value="set headers" />
+    <option name="LAST_COMMIT_MESSAGE" value="set headers" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <PATH>

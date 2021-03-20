@@ -1,3 +1,5 @@
+import {PaginationInterface} from "../../pagination/pagination.interface";
+
 export interface MocksInterface {
   _id: string;
   path: string;
@@ -8,4 +10,9 @@ export interface MocksInterface {
   body: string;
   status: string;
   charset: string;
+}
+
+export interface ResponseInterface {
+  entries: MocksInterface[],
+  pagination: PaginationInterface
 }

@@ -16,6 +16,9 @@ import {TimetrackingComponent} from './timetracking/components/timetracking.comp
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {CodeEditorModule} from '@ngstack/code-editor';
 import {MocksComponent} from "./mockdoc/mocks/mocks.component";
+import {PaginationComponent} from "./pagination/pagination.component";
+import {GlobalService} from "./global.service";
+import {WINDOW_PROVIDERS} from "./window.providers";
 
 const appRoutes = [
   {path: '', component: MockComponent},
@@ -30,7 +33,8 @@ const appRoutes = [
     MockComponent,
     MocksComponent,
     TimetrackingComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,7 @@ const appRoutes = [
     NgxMaterialTimepickerModule.setLocale('de-DE'),
     CodeEditorModule.forRoot()
   ],
-  providers: [DashboardService, TimetrackingService],
+  providers: [DashboardService, TimetrackingService, WINDOW_PROVIDERS, GlobalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -9,7 +9,7 @@ export default class Presenter {
             entries: response,
             pagination: {
                 total,
-                page: page,
+                page: page || 0,
                 results: results
             }
         });

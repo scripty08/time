@@ -9,6 +9,19 @@
     </div>
   </div>
 
+  <ng-template #content let-modal>
+    <div class="card-header">
+      <span class="card-title" id="modal-basic-title">Delte Mock</span>
+    </div>
+    <div class="card-body">
+      Sure you want to delete the Mock?
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-sm btn-success mr-1" (click)="modal.close('Yes click')">Yes</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Cancel click')">Cancel</button>
+    </div>
+  </ng-template>
+
   <div class="content">
     <div class="row">
       <div class="col-md-12">
@@ -21,27 +34,45 @@
               <th scope="col">Title</th>
               <th scope="col">Category</th>
               <th scope="col">Path</th>
-              <th scope="col">Headers</th>
-              <th scope="col">Body</th>
-              <th scope="col">Settings</th>
+              <th scope="col"></th>
             </tr>
             </thead>
-            <tbody *ngFor="let mock of mocks; let i=index;">
-            <tr>
-              <td>{{mock.title}}</td>
-              <td>{{mock.category}}</td>
-              <td>{{mock.path}}</td>
-              <td>{{mock.headers}}</td>
-              <td>{{mock.body}}</td>
-              <td><a (click)="goto(mock._id)">Edit</a></td>
-            </tr>
+            <tbody>
+            <ng-container *ngFor="let mock of mocks; let i=index;">
+              <tr>
+                <td>{{mock.title}}</td>
+                <td>{{mock.category}}</td>
+                <td>{{mock.path}}</td>
+                <td class="text-right">
+                  <button class="btn btn-sm btn-primary mr-1" (click)="goto(mock._id)">
+                    <i class="fas fa-pen"></i>
+                    Edit
+                  </button>
+                  <button class="btn btn-sm btn-primary mr-1" (click)="goto(mock._id)">
+                    <i class="fas fa-search"></i>
+                    View
+                  </button>
+                  <button class="btn btn-sm btn-primary mr-1" (click)="copyText(globalService.getFullHostname() + '/api/mock' + mock.path)">
+                    <i class="fas fa-copy"></i>
+                    Copy
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="onDeleteClick(content)">
+                    <i class="fas fa-trash"></i>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
             </tbody>
           </table>
 
           <div class="card-footer">
-            <button (click)="onSaveBtnClick()" type="submit" class="btn btn-success btn-sm"><i class="fas fa-save"></i>
-              Save
-            </button>
+            <pagination
+              (onChange)="onPaginationChange($event)"
+              [page]="pagination.page"
+              [results]="pagination.results"
+              [total]="pagination.total"
+            ></pagination>
           </div>
         </div>
       </div>
@@ -49,5 +80,4 @@
   </div>
 
 </div>
-
-
+localhost:4200/blub/bla

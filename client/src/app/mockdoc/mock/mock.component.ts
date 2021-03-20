@@ -62,6 +62,7 @@ export class MockComponent implements OnInit {
 
   private initNewMockForm() {
     const controls = {
+      '_id': new FormControl(null, Validators.required),
       'title': new FormControl(null, Validators.required),
       'category': new FormControl('Startpage', Validators.required),
       'path': new FormControl(null, Validators.required),

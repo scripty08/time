@@ -1,6 +1,14 @@
 .mocks {
   .content {
     margin-top: 50px;
+
+    table {
+      margin-bottom: 0;
+      th {
+        border-bottom: 0;
+        border-top: 0;
+      }
+    }
   }
   .toolbar {
     position: fixed;

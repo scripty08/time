@@ -10,7 +10,6 @@ export default class Repository extends BaseRepository {
 
     async update(body) {
         let { _id, ...restProps } = body;
-
         if (!_id) {
             _id = new mongoose.mongo.ObjectID()
         }
