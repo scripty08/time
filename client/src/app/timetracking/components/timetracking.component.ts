@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import CalendarDates from 'calendar-dates';
 import * as moment from 'moment';
 import { IData } from '../interfaces/timetracking.interface';
 import { TimetrackingService } from '../services/timetracking.service';
-import {logger} from "codelyzer/util/logger";
 
 @Component({
     selector: 'timetracking',
@@ -34,6 +33,7 @@ export class TimetrackingComponent implements OnInit {
     currentYear = parseInt(moment().format('Y'));
     currentMonth = parseInt(moment().format('M'));
     data:Array<IData>;
+    range = [];
 
     constructor(private formBuilder:FormBuilder, private $timetrackingService:TimetrackingService) {
         this.timesForm = formBuilder.group({});
@@ -68,11 +68,6 @@ export class TimetrackingComponent implements OnInit {
         this.updateData(data);
     }
 
-    onInput(event):void {
-        const name = event.target.name;
-        const value = event.target.value;
-    }
-
     private initToolbarForm() {
         this.toolbarForm = new FormGroup({
             year: new FormControl(moment().format('Y'), Validators.required),
@@ -91,6 +86,14 @@ export class TimetrackingComponent implements OnInit {
             this.destroyData(_id)
         }
     }
+
+    onRangeChange(e, controlName): void {
+        const values = this.timesForm.getRawValue();
+        const rowControl = values[controlName]['row-control'];
+        rowControl.pause = e.target.value;
+        this.timesForm.patchValue(values);
+    }
+
 
     private async initTimesForm() {
         const calendarDates = new CalendarDates();
@@ -111,7 +114,7 @@ export class TimetrackingComponent implements OnInit {
                     'datum': new FormControl(rec.iso, Validators.required),
                     'start': new FormControl(null, Validators.required),
                     'stop': new FormControl(null, Validators.required),
-                    'pause': new FormControl(null, Validators.required),
+                    'pause': new FormControl(0, Validators.required),
                     'ist': new FormControl(null, Validators.required),
                     'krank': new FormControl(null, Validators.required),
                     'urlaub': new FormControl(null, Validators.required),
@@ -124,13 +127,12 @@ export class TimetrackingComponent implements OnInit {
         }).filter((val:any) => val.type === 'current');
 
         this.timesForm = new FormGroup(controls);
-
-        console.log(this.timesForm, ' <------------ this.timesForm --------------');
     }
 
 
     private fetchData(year, month) {
         this.$timetrackingService.read(year, month).subscribe(rec => {
+            console.log(rec, ' <------------ rec --------------');
             this.timesForm.patchValue(rec);
         });
     }
@@ -142,8 +144,6 @@ export class TimetrackingComponent implements OnInit {
     }
 
     private destroyData(_id) {
-        this.$timetrackingService.destroy(_id).subscribe(rec => {
-            //this.timesForm.patchValue(rec);
-        });
+        this.$timetrackingService.destroy(_id);
     }
 }

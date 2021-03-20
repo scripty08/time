@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import {IData} from "../interfaces/timetracking.interface";
 import { Observable } from "rxjs/index";
 import { of } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({

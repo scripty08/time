@@ -1,0 +1,53 @@
+<div class="mocks">
+  <div class="toolbar">
+    <div class="button-group">
+      <button routerLink="/" type="button" class="btn btn-success btn-sm mx-1"><i class="fas fa-plus"></i> New Mock
+      </button>
+      <button routerLink="/my-mocks" type="button" class="btn btn-primary btn-sm mx-1"><i class="fas fa-table"></i>
+        Manage Mocks
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">My Mocks</div>
+
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Path</th>
+              <th scope="col">Headers</th>
+              <th scope="col">Body</th>
+              <th scope="col">Settings</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let mock of mocks; let i=index;">
+            <tr>
+              <td>{{mock.title}}</td>
+              <td>{{mock.category}}</td>
+              <td>{{mock.path}}</td>
+              <td>{{mock.headers}}</td>
+              <td>{{mock.body}}</td>
+              <td><a (click)="goto(mock._id)">Edit</a></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="card-footer">
+            <button (click)="onSaveBtnClick()" type="submit" class="btn btn-success btn-sm"><i class="fas fa-save"></i>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

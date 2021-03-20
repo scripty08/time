@@ -1,0 +1,91 @@
+<div class="mock">
+
+  <div class="toolbar">
+    <div class="button-group">
+      <button routerLink="/" type="button" class="btn btn-success btn-sm mx-1"><i class="fas fa-plus"></i> New Mock</button>
+      <button routerLink="/my-mocks" type="button" class="btn btn-primary btn-sm mx-1"><i class="fas fa-table"></i> Manage Mocks</button>
+    </div>
+  </div>
+
+  <div class="content">
+  <form [formGroup]="newMockForm">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">{{edit ? 'Edit Mock' : 'New Mock'}}</div>
+          <div class="card-body">
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" [formControlName]="'title'">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select id="category" class="form-control" [formControlName]="'category'">
+                  <option selected>Choose...</option>
+                  <option>Startpage</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="path">Path</label>
+                <input type="text" class="form-control" id="path" placeholder="yourpath/api?myparams=123&moreparams=456" [formControlName]="'path'">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="autoGenerate" [formControlName]="'autoGenerate'">
+                  <label class="form-check-label" for="autoGenerate">Auto generate</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="httpStatus">HTTP Status  *</label>
+                <select id="httpStatus" class="form-control" [formControlName]="'status'">
+                  <option>400</option>
+                  <option>500</option>
+                  <option>200</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="contentType">Content Type *</label>
+                <select id="contentType" class="form-control" [formControlName]="'contentType'">
+                  <option>application/json</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="charset">Charset  *</label>
+                <select id="charset" class="form-control" [formControlName]="'charset'">
+                  <option>UTF-8</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Headers</label>
+              <ngs-code-editor
+                [theme]="theme"
+                [codeModel]="codeModel"
+                [options]="options"
+                (valueChanged)="onCodeChanged($event, 'headers')"
+              >
+              </ngs-code-editor>
+            </div>
+            <div class="form-group">
+              <label>Body</label>
+              <ngs-code-editor
+                [theme]="theme"
+                [codeModel]="codeModel2"
+                [options]="options"
+                (valueChanged)="onCodeChanged($event, 'body')">
+              </ngs-code-editor>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button (click)="onSaveBtnClick()" type="submit" class="btn btn-success btn-sm"><i class="fas fa-save"></i> Save </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

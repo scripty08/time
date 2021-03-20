@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { mongo } from '@scripty/mongo';
 import { AuthController } from '@scripty/auth';
 import { TimesController } from './times/TimesController';
+import { MocksController } from './mocks/Controller';
 
 const init = async () => {
   dotenv.config();
@@ -26,6 +27,7 @@ const init = async () => {
   await server.addController(new AuthController());
   await server.addController(new IndexController({ title: '@scripty/time' }));
   await server.addController(new TimesController());
+  await server.addController(new MocksController());
   server.start(3001);
 };
 

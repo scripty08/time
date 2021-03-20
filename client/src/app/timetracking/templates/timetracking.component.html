@@ -40,14 +40,29 @@
                 </thead>
                 <tbody *ngFor="let date of dates; let i=index;" [formGroupName]="date.controlName">
                   <tr [formGroupName]="'row-control'">
-                    <input [name]="'_id'" (input)="onInput($event)" type="hidden" [formControlName]="'_id'"/>
+                    <input [name]="'_id'" type="hidden" [formControlName]="'_id'"/>
                     <td class="form-group" scope="row">{{ date.kw }}</td>
                     <td class="form-group">{{ date.day }}</td>
-                    <td class="form-group">{{ date.date }}<input [name]="'datum'" (input)="onInput($event)" type="hidden" [formControlName]="'datum'"/></td>
-                    <td class="form-group"><input [name]="'start'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'start'"/></td>
-                    <td class="form-group"><input [name]="'stop'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'stop'"/></td>
-                    <td class="form-group"><input [name]="'pause'" (input)="onInput($event)" type="text" class="form-control" [formControlName]="'pause'"/></td>
-                    <td class="form-group">800<input [name]="'ist'" (input)="onInput($event)" type="hidden" [formControlName]="'ist'"/></td>
+                    <td class="form-group">{{ date.date }}<input [name]="'datum'" type="hidden" [formControlName]="'datum'"/></td>
+                    <td class="form-group">
+                      <input [ngxTimepicker]="startTime" [format]="24"  [formControlName]="'start'" class="form-control">
+                      <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                    </td>
+                    <td class="form-group">
+                      <input [ngxTimepicker]="stopTime" [format]="24"  [formControlName]="'stop'" class="form-control">
+                      <ngx-material-timepicker #stopTime></ngx-material-timepicker>
+                    </td>
+                    <td class="form-group">
+                      <div style="width: 180px;">
+                        <div style="float:left;">
+                          <input type="range" style="width: 100%;" class="custom-range" min="0" max="60" (input)="onRangeChange($event, date.controlName)">
+                        </div>
+                        <div>
+                          <input class="form-control" style="max-width: 45px;" type="text" [formControlName]="'pause'">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="form-group">800<input [name]="'ist'" type="hidden" [formControlName]="'ist'"/></td>
                     <td class="form-group">
                       <div style="height: 5px">
                         <div class="form-check form-check-inline">
