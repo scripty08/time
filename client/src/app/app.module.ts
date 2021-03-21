@@ -8,7 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MockComponent} from './mockdoc/mock/mock.component';
-import {DashboardService} from './mockdoc/mock/mock.service';
+import {MockService} from './mockdoc/mock/mock.service';
 import {HeaderComponent} from './header/header.component';
 import {HttpClientModule} from '@angular/common/http';
 import {TimetrackingService} from "./timetracking/services/timetracking.service";
@@ -16,14 +16,16 @@ import {TimetrackingComponent} from './timetracking/components/timetracking.comp
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {CodeEditorModule} from '@ngstack/code-editor';
 import {MocksComponent} from "./mockdoc/mocks/mocks.component";
-import {PaginationComponent} from "./pagination/pagination.component";
 import {GlobalService} from "./global.service";
 import {WINDOW_PROVIDERS} from "./window.providers";
+import {ToastService} from "./toast/toast.service";
+import {ToastsContainerComponent} from "./toast/toasts-container.component";
+import {MocksService} from "./mockdoc/mocks/mocks.service";
 
 const appRoutes = [
   {path: '', component: MockComponent},
   {path: 'edit/:id', component: MockComponent},
-  {path: 'my-mocks', component: MocksComponent},
+  {path: 'manage-mocks', component: MocksComponent},
   {path: 'timetracking', component: TimetrackingComponent},
 ];
 
@@ -34,7 +36,7 @@ const appRoutes = [
     MocksComponent,
     TimetrackingComponent,
     HeaderComponent,
-    PaginationComponent
+    ToastsContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ const appRoutes = [
     NgxMaterialTimepickerModule.setLocale('de-DE'),
     CodeEditorModule.forRoot()
   ],
-  providers: [DashboardService, TimetrackingService, WINDOW_PROVIDERS, GlobalService],
+  providers: [MockService, MocksService, TimetrackingService, WINDOW_PROVIDERS, GlobalService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

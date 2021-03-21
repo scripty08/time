@@ -21,7 +21,7 @@ export class GlobalService {
 
   getFullHostname(): string {
     if (this.window.location.port) {
-      return this.window.location.hostname + ':' + this.window.location.port;
+      return this.window.location.protocol + '//' + this.window.location.hostname + ':' + this.window.location.port;
     }
     return this.window.location.hostname;
   }

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MocksService} from "./mocks.service";
 import {MocksInterface} from "./mocks.interface";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {PaginationInterface} from "../../pagination/pagination.interface";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GlobalService} from "../../global.service";
+import {ToastService} from "../../toast/toast.service";
 
 @Component({
   selector: 'mocks',
@@ -16,33 +17,39 @@ export class MocksComponent implements OnInit {
   mocks: MocksInterface[];
   pagination: PaginationInterface = {page: 1, results: 10, total: 1};
   closeResult = '';
+  serviceUrl = '';
+  paginationSize: number;
 
   constructor(
     private $mockService: MocksService,
     private router: Router,
     private modalService: NgbModal,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public toastService: ToastService
   ) {
   }
 
   ngOnInit(): void {
-    this.readData({
-      page: 0,
-      results: 5
-    });
+    this.readData({page: 0, results: 5});
+    this.serviceUrl = this.globalService.getFullHostname() + '/api/mock'
   }
 
   onSaveBtnClick(): void {
     console.log(this.mocks);
   }
 
-  onPaginationChange(pagination) {
-    this.readData(pagination)
+  onPaginationChange(page) {
+    this.readData({page: page-1, results: 5});
   }
 
-  onDeleteClick(content): void {
+  onDeleteClick(content, _id): void {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.$mockService.destroy({_id}).subscribe(response => {
+        this.readData({page: 0, results: 5});
+        this.toastService.show('deleted!', { classname: 'bg-success text-light', delay: 3000 });
+      });
+
     }, (reason) => {
       this.closeResult = `Dismissed`;
     });
@@ -52,7 +59,8 @@ export class MocksComponent implements OnInit {
   private readData(pagination) {
     this.$mockService.read(pagination).subscribe(response => {
       this.mocks = response.entries;
-      this.pagination = response.pagination;
+      //this.pagination = response.pagination;
+      this.paginationSize = Math.ceil(response.pagination.total / response.pagination.results);
     });
   }
 
@@ -60,7 +68,7 @@ export class MocksComponent implements OnInit {
     this.router.navigate(['/edit/' + id]);
   }
 
-  copyText(val: string){
+  copyText(val: string) {
     let selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -72,5 +80,6 @@ export class MocksComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+    this.toastService.show(val + ' copied!', { classname: 'bg-success text-light', delay: 3000 });
   }
 }

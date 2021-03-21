@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {CodeModel} from "./code.interface";
-import {DashboardService} from "./mock.service";
+import {MockService} from "./mock.service";
 import {ActivatedRoute, Router } from '@angular/router';
 import {MockInterface} from "./mock.interface";
+import {MocksService} from "../mocks/mocks.service";
 
 @Component({
   selector: 'mock',
@@ -17,7 +18,12 @@ export class MockComponent implements OnInit {
   mock: MockInterface;
   edit = false;
 
-  constructor(private formBuilder:FormBuilder, private $mockService: DashboardService,  private $route: ActivatedRoute) {
+  constructor(
+    private formBuilder:FormBuilder,
+    private $mockService: MockService,
+    private $route: ActivatedRoute,
+    private router: Router
+  ) {
     this.newMockForm = formBuilder.group({});
   }
 
@@ -32,6 +38,9 @@ export class MockComponent implements OnInit {
 
   onSaveBtnClick() {
     this.updateMock(this.newMockForm.value);
+  }
+  onCancelBtnClick() {
+    this.router.navigate(['/manage-mocks']);
   }
 
   codeModel: CodeModel = {

@@ -9,7 +9,7 @@ export default class Repository extends BaseRepository {
 
     async destroy(query) {
         try {
-            await query.map(async _id => await this.model.findOneAndRemove({ _id: _id }));
+            await this.model.findOneAndRemove({ _id: query._id });
         } catch (e) {
             Logger.error(e)
         }

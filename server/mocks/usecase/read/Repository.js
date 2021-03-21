@@ -10,13 +10,8 @@ export default class Repository extends BaseRepository {
     async read(query) {
         try {
             const total = await this.model.countDocuments({});
-            let page = parseInt(query.current);
+            let page = parseInt(query.page);
             let results = parseInt(query.results);
-
-            if (page !== 0) {
-                page = page - 1;
-            }
-
             const response = await this.model
                 .find({})
                 .limit(results)

@@ -8,7 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class MockService {
   rootURL = '/api';
 
   constructor(private http: HttpClient) { }
