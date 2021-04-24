@@ -24,13 +24,13 @@ export class MockService {
     );
   }
 
-  update(data): Observable<MockInterface[]> {
+  update(data): Observable<any> {
     return this.http.post<MockInterface[]>(this.rootURL + '/update', data).pipe(
       map((res: any) => {
         if (!res.entries) {
           throw new Error('Value expected!');
         }
-        return res.entries;
+        return {entries: res.entries, updated: res.updated};
       }),
       catchError(err => of([]))
     );

@@ -30,7 +30,7 @@ export class MocksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.readData({page: 0, results: 5});
+    this.readData({page: 0, results: 10});
     this.serviceUrl = this.globalService.getFullHostname() + '/api/mock'
   }
 
@@ -39,17 +39,18 @@ export class MocksComponent implements OnInit {
   }
 
   onPaginationChange(page) {
-    this.readData({page: page-1, results: 5});
+    this.readData({page: page-1, results: 10});
   }
 
   onDeleteClick(content, _id): void {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-      this.$mockService.destroy({_id}).subscribe(response => {
-        this.readData({page: 0, results: 5});
-        this.toastService.show('deleted!', { classname: 'bg-success text-light', delay: 3000 });
-      });
-
+      if (result === 'yes') {
+        this.$mockService.destroy({_id}).subscribe(response => {
+          this.readData({page: 0, results: 10});
+          this.toastService.show('deleted!', { classname: 'bg-success text-light', delay: 3000 });
+        });
+      }
     }, (reason) => {
       this.closeResult = `Dismissed`;
     });

@@ -17,8 +17,8 @@
       Sure you want to delete the Mock?
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-sm btn-success mr-1" (click)="modal.close('Yes click')">Yes</button>
-      <button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Cancel click')">Cancel</button>
+      <button type="button" class="btn btn-sm btn-success mr-1" (click)="modal.close('yes')">Yes</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="modal.close('cancel')">Cancel</button>
     </div>
   </ng-template>
 
@@ -33,7 +33,6 @@
             <thead>
             <tr>
               <th scope="col">Title</th>
-              <th scope="col">Category</th>
               <th scope="col">Path</th>
               <th scope="col"></th>
             </tr>
@@ -42,14 +41,13 @@
             <ng-container *ngFor="let mock of mocks; let i=index;">
               <tr>
                 <td>{{mock.title}}</td>
-                <td>{{mock.category}}</td>
                 <td>{{mock.path}}</td>
                 <td class="text-right">
                   <button class="btn btn-sm btn-primary mr-1" (click)="goto(mock._id)">
                     <i class="fas fa-pen"></i>
                     Edit
                   </button>
-                  <a class="btn btn-sm btn-primary mr-1" [href]="this.serviceUrl + mock.path" target="_blank">
+                  <a class="btn btn-sm btn-primary mr-1" [href]="'/api/mock'+mock.path" target="_blank">
                     <i class="fas fa-search"></i>
                     View
                   </a>

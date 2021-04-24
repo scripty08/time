@@ -1,10 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import {CodeModel} from "./code.interface";
 import {MockService} from "./mock.service";
 import {ActivatedRoute, Router } from '@angular/router';
 import {MockInterface} from "./mock.interface";
-import {MocksService} from "../mocks/mocks.service";
+import {ToastService} from "../../toast/toast.service";
+import {GlobalService} from "../../global.service";
+
+
+function pathValidator (control: AbstractControl):{[key: string]: boolean} | null {
+
+  if( control.value !==null && control.value.indexOf('/') === -1){
+    return {'pathValidator': true}
+  }
+  return null;
+};
+
 
 @Component({
   selector: 'mock',
@@ -17,17 +28,21 @@ export class MockComponent implements OnInit {
   id: string;
   mock: MockInterface;
   edit = false;
+  serviceUrl = '';
 
   constructor(
     private formBuilder:FormBuilder,
     private $mockService: MockService,
     private $route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public toastService: ToastService,
+    public globalService: GlobalService,
   ) {
     this.newMockForm = formBuilder.group({});
   }
 
   ngOnInit() {
+    this.serviceUrl = this.globalService.getFullHostname() + '/api/mock'
     const id = this.$route.snapshot.paramMap.get('id');
     if (id) {
       this.edit = true;
@@ -69,25 +84,40 @@ export class MockComponent implements OnInit {
     });
   }
 
+  copyText(val: string) {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.toastService.show(val + ' copied!', { classname: 'bg-success text-light', delay: 3000 });
+  }
+
   private initNewMockForm() {
     const controls = {
-      '_id': new FormControl(null, Validators.required),
+      '_id': new FormControl(null),
       'title': new FormControl(null, Validators.required),
-      'category': new FormControl('Startpage', Validators.required),
-      'path': new FormControl(null, Validators.required),
-      'autoGenerate': new FormControl(null, Validators.required),
+      'path': new FormControl(null, [Validators.required, pathValidator]),
       'status': new FormControl('200', Validators.required),
       'contentType': new FormControl('application/json', Validators.required),
       'charset': new FormControl('UTF-8', Validators.required),
-      'headers': new FormControl(null, Validators.required),
-      'body': new FormControl(null, Validators.required),
+      'headers': new FormControl(null),
+      'body': new FormControl(null),
     };
     this.newMockForm = new FormGroup(controls);
   }
 
   private updateMock(data) {
-    this.$mockService.update(data).subscribe(rec => {
-      this.newMockForm.patchValue(rec);
+    this.$mockService.update(data).subscribe((rec) => {
+      this.newMockForm.patchValue(rec.entries);
+      this.toastService.show('saved!', { classname: 'bg-success text-light', delay: 3000 });
+      this.router.navigate(['/edit/' + rec.updated._id]);
     });
   }
 

@@ -12,26 +12,34 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="card">
-          <div class="card-header">{{edit ? 'Edit Mock' : 'New Mock'}}</div>
+          <div class="card-header d-inline">
+            <span>{{edit ? 'Edit Mock' : 'New Mock'}}</span>
+            <span *ngIf="edit" style="float:right">
+              <a class="btn btn-sm btn-primary mr-1" [href]="'/api/mock'+mock.path" target="_blank">
+                    <i class="fas fa-search"></i>
+                    View
+                  </a>
+                  <button class="btn btn-sm btn-primary mr-1" (click)="copyText(this.serviceUrl + mock.path)">
+                    <i class="fas fa-copy"></i>
+                    Copy
+                  </button>
+            </span>
+          </div>
           <div class="card-body">
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" [formControlName]="'title'">
+                <label for="title">Title*</label>
+                <input type="text" class="form-control" id="title" [formControlName]="'title'" required>
               </div>
               <div class="form-group col-md-6">
-                <label for="category">Category</label>
-                <select id="category" class="form-control" [formControlName]="'category'">
-                  <option selected>Choose...</option>
-                  <option>Startpage</option>
-                </select>
+
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="path">Path</label>
-                <input type="text" class="form-control" id="path" placeholder="/yourpath/api?myparams=123&moreparams=456" [formControlName]="'path'">
+                <label for="path">Path*</label>
+                <input type="text" class="form-control" id="path" placeholder="/yourpath/api?myparams=123&moreparams=456" [formControlName]="'path'" required>
                 <div class="form-check">
                   <!--<input type="checkbox" class="form-check-input" id="autoGenerate" [formControlName]="'autoGenerate'">-->
                   <!--<label class="form-check-label" for="autoGenerate">Auto generate</label>-->
@@ -41,22 +49,95 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="httpStatus">HTTP Status  *</label>
-                <select id="httpStatus" class="form-control" [formControlName]="'status'">
-                  <option>400</option>
-                  <option>500</option>
-                  <option>200</option>
+                <select id="httpStatus" class="form-control" [formControlName]="'status'" required>
+                  <option value="100">100 - Continue</option>
+                  <option value="101">101 - Switching Protocols</option>
+                  <option value="102">102 - Processing</option>
+                  <option value="200">200 - OK</option>
+                  <option value="201">201 - Created</option>
+                  <option value="202">202 - Accepted</option>
+                  <option value="203">203 - Non-Authoritative Information</option>
+                  <option value="204">204 - No Content</option>
+                  <option value="205">205 - Reset Content</option>
+                  <option value="206">206 - Partial Content</option>
+                  <option value="207">207 - Multi-Status</option>
+                  <option value="208">208 - Already Reported</option>
+                  <option value="226">226 - IM Used</option>
+                  <option value="300">300 - Multiple Choices</option>
+                  <option value="301">301 - Moved Permanently</option>
+                  <option value="302">302 - Found</option>
+                  <option value="303">303 - See Other</option>
+                  <option value="304">304 - Not Modified</option>
+                  <option value="305">305 - Use Proxy</option>
+                  <option value="306">306 - Switch Proxy</option>
+                  <option value="307">307 - Temporary Redirect</option>
+                  <option value="308">308 - Permanent Redirect</option>
+                  <option value="400">400 - Bad Request</option>
+                  <option value="401">401 - Unauthorized</option>
+                  <option value="402">402 - Payment Required</option>
+                  <option value="403">403 - Forbidden</option>
+                  <option value="404">404 - Not Found</option>
+                  <option value="405">405 - Method Not Allowed</option>
+                  <option value="406">406 - Not Acceptable</option>
+                  <option value="407">407 - Proxy Authentication Required</option>
+                  <option value="408">408 - Request Timeout</option>
+                  <option value="409">409 - Conflict</option>
+                  <option value="410">410 - Gone</option>
+                  <option value="411">411 - Length Required</option>
+                  <option value="412">412 - Precondition Failed</option>
+                  <option value="413">413 - Request Entity Too Large</option>
+                  <option value="414">414 - Request-URI Too Long</option>
+                  <option value="415">415 - Unsupported Media Type</option>
+                  <option value="416">416 - Requested Range Not Satisfiable</option>
+                  <option value="417">417 - Expectation Failed</option>
+                  <option value="418">418 - Im a teapot</option>
+                  <option value="420">420 - Enhance Your Calm</option>
+                  <option value="422">422 - Unprocessable Entity</option>
+                  <option value="423">423 - Locked</option>
+                  <option value="424">424 - Failed Dependency</option>
+                  <option value="425">425 - Unordered Collection</option>
+                  <option value="426">426 - Upgrade Required</option>
+                  <option value="428">428 - Precondition Required</option>
+                  <option value="429">429 - Too Many Requests</option>
+                  <option value="431">431 - Request Header Fields Too Large</option>
+                  <option value="444">444 - No Response</option>
+                  <option value="449">449 - Retry With</option>
+                  <option value="450">450 - Blocked by Windows Parental Controls</option>
+                  <option value="499">499 - Client Closed Request</option>
+                  <option value="500">500 - Internal Server Error</option>
+                  <option value="501">501 - Not Implemented</option>
+                  <option value="502">502 - Bad Gateway</option>
+                  <option value="503">503 - Service Unavailable</option>
+                  <option value="504">504 - Gateway Timeout</option>
+                  <option value="505">505 - HTTP Version Not Supported</option>
+                  <option value="506">506 - Variant Also Negotiates</option>
+                  <option value="507">507 - Insufficient Storage</option>
+                  <option value="509">509 - Bandwidth Limit Exceeded</option>
+                  <option value="510">510 - Not Extended</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
                 <label for="contentType">Content Type *</label>
-                <select id="contentType" class="form-control" [formControlName]="'contentType'">
+                <select id="contentType" class="form-control" [formControlName]="'contentType'" required>
                   <option>application/json</option>
+                  <option>application/x-www-form-urlencoded</option>
+                  <option>application/xhtml+xml</option>
+                  <option>application/xml</option>
+                  <option>multipart/form-data</option>
+                  <option>text/css</option>
+                  <option>text/csv</option>
+                  <option>text/html</option>
+                  <option>text/json</option>
+                  <option>text/plain</option>
+                  <option>text/xml</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
                 <label for="charset">Charset  *</label>
-                <select id="charset" class="form-control" [formControlName]="'charset'">
+                <select id="charset" class="form-control" [formControlName]="'charset'" required>
                   <option>UTF-8</option>
+                  <option>UTF-16</option>
+                  <option>ISO-8859-1</option>
                 </select>
               </div>
             </div>
@@ -81,7 +162,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <button (click)="onSaveBtnClick()" type="submit" class="btn btn-success btn-sm mr-1"><i class="fas fa-save"></i> Save </button>
+            <button [disabled]="!newMockForm.valid" (click)="onSaveBtnClick()" type="submit" class="btn btn-success btn-sm mr-1"><i class="fas fa-save"></i> Save </button>
             <button *ngIf="edit" (click)="onCancelBtnClick()" type="submit" class="btn btn-danger btn-sm"><i class="fas fa-cancel"></i> Cancel </button>
           </div>
         </div>
